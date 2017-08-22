@@ -1,0 +1,69 @@
+
+void CreateFile(char fileName[]){
+
+      int charCntr=0;
+      int i =0;
+      int ii = 0;
+      int sectNum =0;
+      int mod=0;
+      char input[512];
+      char array[13312];
+      int boolean = 0;
+
+      while(1)
+      {
+
+	  interrupt(0x21, 0, "Please enter a line : \0", 0,0);
+    ii=0;
+     while(ii<512){
+       input[ii]=0;
+       ii++;
+     }
+      interrupt(0x21,1,input,0,0);
+
+
+
+        if(input[0] ==  0)
+        {
+          
+            break;
+        }
+
+
+          // if(input[0]=='\0' || input[0] == '\0')
+          //    {
+          //     boolean = 1;
+           // interrupt(0x21, 0,input[0], 0,0);
+              // interrupt(0x10,0xe*256+input[0],0,0,0);
+          //     break;
+          //   }
+             
+        while(input[i]!='\0')
+        {
+        array[charCntr]=input[i];
+        charCntr++;
+        i++;
+        }
+        i=0;
+
+
+    }
+    //interrupt(0x21, 0,"finally out ", 0,0);
+    //interrupt(0x21, 0,array, 0,0);
+
+    sectNum=charCntr/512;
+     mod=MOD(sectNum,512);
+    if(mod!=0)
+    	sectNum++;
+
+    interrupt(0x21,8,fileName,array,sectNum);
+    //interrupt(0x21,3,fileName,array,0);
+    //interrupt(0x21,0,array,0,0);
+
+
+
+	}
+
+
+
+
